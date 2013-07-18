@@ -25,16 +25,6 @@ define(["jquery"], function ($) {
                         var method = options.type.toLowerCase();
                         if(method == "put" || method == "post"){
                             connectsParams.body = options.data;
-                        }else if(method == "delete" && options.data){
-                            //TODO: HACK: parse ids out of the data object, and add them as a query param.
-                            var ids = [];
-                            _.each(JSON.parse(options.data), function(item){
-                                if(item.length){
-                                    ids = ids.concat(_.pluck(item, "id"));
-                                }
-                            });
-                            console.log("making a delete request with ids: ", ids);
-                            connectsParams.params = {ids: ids.join(",")};
                         }
 
                         var connectsRequest = osapi.jive.connects[method](connectsParams);
